@@ -1,0 +1,1666 @@
+/*
+     Theme Name:w2ctheme
+     Description:This is a blog website
+     Author:Way2class
+*/
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Geist", "Geist Fallback", sans-serif; /* Added Geist font family */
+    /* Add other base body styles if needed */
+    margin: 0;
+    color: #333; /* Default text color */
+    background-color: #fff; /* Default background */
+}
+
+.site-header {
+    display: flex;
+    justify-content: space-between; /* Keeps logo left, container right */
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+    position: relative; /* Needed for absolute positioning of mega menu */
+}
+
+.site-branding {
+    flex: 1 0 auto; /* Allow logo to take space but not shrink */
+    /* max-width needed? Maybe not if mobile-menu-container also grows */
+}
+
+.site-branding .site-title {
+    /* If using text instead of logo image */
+    font-size: 1.5em; /* Adjust as needed */
+    font-weight: bold;
+    text-decoration: none;
+    color: #333; /* Adjust color */
+}
+.site-branding a {
+    text-decoration: none;
+    display: flex; /* Align logo image and text if both are present */
+    align-items: center;
+    transition: color 0.3s ease; /* Add transition for hover */
+}
+
+.site-branding a:hover .site-title {
+    color: #007bff; /* Change title color on hover */
+}
+
+.mobile-menu-container {
+    display: flex;
+    justify-content: flex-end; /* Align items (nav, button) to the right within this container */
+    align-items: center;
+    flex: 1 1 auto; /* Allow this container to grow and shrink */
+    margin-left: 0; /* Reset margin */
+}
+
+.main-navigation {
+    /* This will now be centered because .site-branding and .mobile-menu-container flank it */
+    /* Optional: Add specific margins if needed for fine-tuning */
+    margin: 0 20px; /* Add some space around the nav */
+    flex-shrink: 0; /* Prevent nav from shrinking too much */
+}
+
+.main-navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Arrange menu items horizontally */
+}
+
+.main-navigation ul li {
+    margin: 0 15px; /* Spacing between menu items */
+}
+
+.main-navigation ul li a {
+    text-decoration: none;
+    color: #333; /* Adjust link color */
+    font-weight: 500; /* Adjust font weight */
+    padding-bottom: 5px; /* Add some space for the underline */
+    border-bottom: 2px solid transparent; /* Placeholder for underline */
+    transition: border-bottom-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.main-navigation ul li a:hover {
+    color: #007bff; /* Blue color on hover */
+    border-bottom-color: #007bff; /* Blue underline on hover */
+}
+
+/* Style for dropdown arrows if your menu has sub-items */
+.main-navigation .menu-item-has-children > a::after {
+    content: ' ▼'; /* Simple dropdown indicator */
+    font-size: 0.7em;
+    margin-left: 5px;
+}
+
+/* Ensure the header button stays on the far right */
+.header-button {
+    margin-left: auto; /* Push button to the end of the mobile-menu-container */
+    flex-shrink: 0;
+}
+
+.header-button .button {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue background like the image */
+    color: #fff; /* White text */
+    text-decoration: none;
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.header-button .button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+.logo_link{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo{
+    width: 4rem;
+    border-radius: 10px;
+}
+.site_name{
+   font-size: 1.5rem;
+    color: #000;
+    font-weight: 600;
+}
+
+/*--------------------------------------------------------------
+# General Content Area (Example)
+--------------------------------------------------------------*/
+.site-content {
+    padding: 20px 30px; /* Adjust padding */
+}
+
+/*--------------------------------------------------------------
+# Sidebar Layout
+--------------------------------------------------------------*/
+.content-sidebar-wrap {
+    display: flex;
+    gap: 30px; /* Space between content and sidebar */
+    /* background-color: #007bff; */ /* Replaced with gradient */
+    background-color: #0d6efd; /* Base blue color */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px), /* Increased opacity and line width */
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.15) 2px, transparent 2px); /* Increased opacity and line width */
+    background-size: 40px 40px; /* Grid block size remains the same */
+    padding: 30px; /* Padding around the content and sidebar */
+    color: #fff; /* Default text color for this section */
+    /* Ensure flex wrap is enabled if needed on smaller screens */
+    /* flex-wrap: wrap; */
+}
+
+/* New Left Sidebar Area */
+.widget-area-left {
+    flex: 1.2; /* Increased flex basis */
+    order: 1; /* Position on the left */
+    /* Add specific styling if different from right sidebar */
+}
+
+.category-main,
+.single-post-main,
+.index-main { /* Added .index-main and target main content areas */
+    flex: 2.1; /* Decreased flex basis to give sidebars more relative space */
+    background-color: #fff; /* White background for content area */
+    padding: 20px;
+    border-radius: 5px;
+    color: #333; /* Reset text color for content */
+    order: 2; /* Position in the middle */
+}
+
+.widget-area { /* Right Sidebar */
+    flex: 1.2; /* Increased flex basis */
+    /* Sidebar widgets will inherit the blue background */
+    order: 3; /* Position on the right */
+}
+
+/* Style the widgets in the sidebar */
+.widget-area .widget {
+    background-color: #fff; /* White background for widgets */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #333; /* Reset text color for widgets */
+}
+
+.widget-area .widget-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover */
+}
+
+.widget-area .widget:hover {
+    transform: translateY(-3px); /* Slight lift effect for widgets */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow for widgets */
+}
+
+.widget-area ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.widget-area ul li {
+    margin-bottom: 10px;
+}
+
+.widget-area ul li a {
+    text-decoration: none;
+    color: #007bff; /* Blue links */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Add transition */
+}
+
+.widget-area ul li a:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
+
+/*--------------------------------------------------------------
+# Responsive Styles
+--------------------------------------------------------------*/
+
+/* Tablet View (e.g., <= 992px) */
+@media (max-width: 992px) {
+    .content-sidebar-wrap {
+        flex-direction: column; /* Stack content and sidebars */
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .widget-area-left,
+    .widget-area { /* Both sidebars */
+        order: 1; /* Move sidebars below content */
+        flex-basis: auto; /* Reset flex basis */
+    }
+
+    .category-main,
+    .single-post-main,
+    .index-main {
+        order: 2; /* Ensure main content is first */
+        flex-basis: auto; /* Reset flex basis */
+    }
+
+    .footer-widgets-wrap {
+        gap: 30px;
+    }
+
+    .footer-widget {
+        min-width: calc(50% - 20px); /* Aim for two columns */
+        flex-basis: calc(50% - 20px);
+    }
+
+    .site-header {
+        padding: 15px 20px;
+    }
+
+    .main-navigation ul li {
+        margin: 0 10px;
+    }
+}
+
+/* Mobile View (e.g., <= 767px) */
+@media (max-width: 767px) {
+    .site-header {
+        /* Stack header items */
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .main-navigation ul {
+        flex-direction: column; /* Stack nav items */
+        align-items: center;
+        gap: 10px;
+    }
+    .main-navigation ul li {
+        margin: 0;
+    }
+
+    .header-button {
+        margin-top: 10px;
+    }
+
+    .category-main .post-item-wrapper,
+    .index-main .post-item-wrapper {
+        flex-direction: column; /* Stack image and text */
+        min-height: auto; /* Reset min-height */
+    }
+
+    .category-main .post-thumbnail,
+    .index-main .post-thumbnail {
+        flex-basis: auto; /* Reset flex basis */
+        width: 100%; /* Make image full width */
+        height: 200px; /* Adjust height as needed */
+        margin-bottom: 15px;
+    }
+
+    .footer-widgets-wrap {
+        flex-direction: column; /* Stack footer columns */
+        gap: 30px;
+    }
+
+    .footer-widget {
+        min-width: 100%; /* Full width */
+        flex-basis: 100%;
+    }
+
+    .site-footer {
+        padding: 30px 15px 0;
+    }
+
+    .footer-bottom-bar {
+        padding: 15px;
+        font-size: 0.85em;
+    }
+
+    .single-post-thumbnail {
+        width: 100%; /* Make image full width */
+        height: auto; /* Adjust height automatically */
+        max-height: 250px; /* Optional max height */
+    }
+}
+
+/*--------------------------------------------------------------
+# Footer Styles
+--------------------------------------------------------------*/
+.site-footer {
+    background-color: #0a192f; /* Dark blue background from image */
+    color: #a8b2d1; /* Light grey/blue text color from image */
+    padding: 50px 30px 0; /* Padding top/bottom, left/right */
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.footer-widgets-wrap {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 40px; /* Space between columns */
+    max-width: 1200px; /* Optional: constrain width */
+    margin: 0 auto; /* Center the wrap */
+    padding-bottom: 40px;
+}
+
+.footer-widget {
+    flex: 1; /* Allow columns to share space */
+    min-width: 220px; /* Minimum width before wrapping */
+}
+
+/* Column 1: Logo & Description */
+.footer-col-1 .footer-logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+.footer-col-1 .footer-logo-img {
+    max-height: 40px; /* Adjust logo size */
+    width: auto;
+    border-radius: 4px; /* Match logo style */
+}
+
+.footer-col-1 .footer-site-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #fff; /* White color for title */
+}
+
+.footer-col-1 .footer-description {
+    margin-bottom: 20px;
+    color: #8892b0; /* Slightly different grey for description */
+}
+
+.footer-col-1 .footer-social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #a8b2d1;
+    text-decoration: none;
+    /* Replace span with actual icons (e.g., Font Awesome) */
+    /* Example using placeholders */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.footer-col-1 .footer-social-icons a .social-icon {
+    /* Hide text if using icon font */
+     /* font-size: 0; */
+     /* For placeholder text: */
+     font-size: 0.8em;
+     font-weight: bold;
+}
+
+
+.footer-col-1 .footer-social-icons a:hover {
+    background-color: #007bff; /* Blue hover like header button */
+    color: #fff;
+}
+
+/* Columns 2, 3, 4: Titles & Lists */
+.footer-widget .widget-title {
+    color: #fff; /* White title */
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-widget .footer-menu li,
+.footer-widget .footer-contact-info li {
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.footer-widget .footer-menu li a,
+.footer-widget .footer-contact-info li,
+.footer-widget .footer-contact-info li a {
+    color: #a8b2d1;
+    text-decoration: none;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-widget .footer-menu li a:hover {
+    color: #fff; /* White hover */
+    padding-left: 5px; /* Indent on hover */
+}
+.footer-widget .footer-contact-info li a:hover {
+    color: #fff; /* White hover */
+}
+
+
+/* Add arrow for menu items */
+.footer-widget .footer-menu li::before {
+    content: '>'; /* Arrow character */
+    position: absolute;
+    left: -15px; /* Position arrow to the left */
+    color: #a8b2d1;
+    font-weight: bold;
+    /* Adjust if using padding-left on li instead */
+}
+.footer-widget .footer-menu li {
+     padding-left: 15px; /* Make space for the arrow */
+}
+
+
+/* Column 4: Contact Info & Button */
+.footer-col-4 .footer-contact-info li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.footer-col-4 .contact-icon {
+    /* Style placeholder or replace with actual icon */
+    color: #007bff; /* Blue icon color */
+    font-weight: bold; /* Placeholder style */
+    font-size: 0.9em; /* Placeholder style */
+}
+
+.footer-col-4 .footer-contact-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 18px;
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.footer-col-4 .footer-contact-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Footer Bottom Bar */
+.footer-bottom-bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle top border */
+    padding: 20px 30px;
+    margin-top: 30px; /* Space above the bottom bar */
+    text-align: center;
+    font-size: 0.9em;
+    color: #8892b0; /* Grey text */
+}
+
+.footer-bottom-bar p {
+    margin: 0;
+}
+
+
+/*--------------------------------------------------------------
+# Single Post Featured Image & Hover Effects
+--------------------------------------------------------------*/
+/* Updated Single Post Image Styles */
+.single-post-thumbnail {
+    width: 100%; /* Changed from 250px */
+    height: 320px; /* Kept fixed height as requested */
+    overflow: hidden;
+    margin-bottom: 25px; /* Increased margin */
+    border-radius: 5px;
+    position: relative; /* Needed for potential overlay or effects */
+}
+
+.single-post-thumbnail img {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease; /* Added filter transition */
+}
+
+.single-post-thumbnail:hover img {
+    transform: scale(1.05); /* Slightly zoom in */
+    filter: brightness(1.1); /* Slightly brighten */
+}
+
+
+
+/*--------------------------------------------------------------
+# Blog Index & Category Page Post Layout
+--------------------------------------------------------------*/
+.category-main .category-post-item,
+.index-main .index-post-item { /* Added .index-main selector */
+    /* Remove default bottom border if it interferes */
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 40px; /* Add space between posts */
+}
+
+.category-main .post-item-wrapper {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px; /* Space between image and text */
+    background-color: #f9f9f9; /* Light background for the post card */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    min-height: 200px; /* Minimum height for the card */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    transition: box-shadow 0.3s ease; /* Add transition for existing hover */
+}
+
+.category-main .post-item-wrapper:hover,
+.index-main .post-item-wrapper:hover { /* Added .index-main selector */
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Enhance shadow on hover */
+     /* Keep existing transform from .category-main article:hover if desired */
+}
+
+
+.category-main .post-thumbnail,
+.index-main .post-thumbnail { /* Added .index-main selector */
+    flex: 0 0 250px; /* Fixed width for the image container */
+    height: 180px; /* Fixed height for the image container */
+    overflow: hidden; /* Hide parts of image that don't fit */
+    position: relative; /* Needed for overlay and hover effects */
+    border-radius: 5px; /* Rounded corners for the image container */
+}
+
+.category-main .post-thumbnail a,
+.index-main .post-thumbnail a { /* Added .index-main selector */
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.category-main .post-thumbnail img,
+.index-main .post-thumbnail img { /* Added .index-main selector */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Scale image to cover the container */
+    display: block;
+    transition: transform 0.4s ease; /* Smooth transition for hover */
+}
+
+.category-main .post-thumbnail:hover img,
+.index-main .post-thumbnail:hover img { /* Added .index-main selector */
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+
+/* Optional: Style the overlay if you keep it */
+.category-main .post-thumbnail .thumbnail-overlay,
+.index-main .post-thumbnail .thumbnail-overlay { /* Added .index-main selector */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+}
+
+.category-main .post-thumbnail:hover .thumbnail-overlay,
+.index-main .post-thumbnail:hover .thumbnail-overlay { /* Added .index-main selector */
+    opacity: 1;
+}
+
+
+.category-main .post-content-wrap,
+.index-main .post-content-wrap { /* Added .index-main selector */
+    flex: 1; /* Allow text content to take remaining space */
+    display: flex;
+    flex-direction: column; /* Stack header, summary, footer vertically */
+}
+
+.category-main .post-content-wrap .entry-header,
+.index-main .post-content-wrap .entry-header { /* Added .index-main selector */
+    margin-bottom: 10px;
+}
+
+.category-main .post-content-wrap .entry-summary,
+.index-main .post-content-wrap .entry-summary { /* Added .index-main selector */
+    flex-grow: 1; /* Allow summary to take available vertical space */
+    margin-bottom: 15px;
+}
+
+.category-main .post-content-wrap .read-more,
+.index-main .post-content-wrap .read-more { /* Added .index-main selector */
+    display: inline-block; /* Make it behave like a button */
+    margin-top: auto; /* Push to the bottom if needed, though flex-grow on summary helps */
+    align-self: flex-start; /* Align to the left */
+    /* Add button-like styling if desired */
+    /* background-color: #0d6efd; */
+    /* color: #fff; */
+    /* padding: 5px 10px; */
+    /* border-radius: 3px; */
+}
+
+/* Adjust existing hover on article if needed */
+.category-main article:hover,
+.index-main article:hover { /* Added .index-main selector */
+    transform: none; /* Remove lift effect if using wrapper hover */
+    box-shadow: none; /* Remove shadow if using wrapper hover */
+}
+
+/* Custom Services Widget Styling */
+.widget_custom_html .services-widget-container {
+	display: flex; /* Use flexbox for layout */
+	flex-wrap: wrap; /* Allow wrapping if needed */
+	gap: 15px; /* Add space between title and list */
+	align-items: flex-start; /* Align items at the top */
+	margin-bottom: 1.5em; /* Add some space below the widget */
+	padding: 15px; /* Add padding inside the container */
+	background-color: #333; /* Dark background like the image */
+	color: #fff; /* White text */
+	border-radius: 5px; /* Rounded corners */
+}
+
+.widget_custom_html .services-widget-title {
+	flex: 0 0 auto; /* Don't grow or shrink, base size on content */
+	font-weight: bold;
+	margin-right: 15px; /* Space between title and list */
+	font-size: 1.1em; /* Slightly larger title */
+	/* Ensure title stays on the left */
+}
+.services-widget-title{
+    font-size: 1.5rem !important;
+    margin: 0.3rem 0;
+    font-weight: 600;
+}
+
+.widget_custom_html .services-widget-list {
+	flex: 1 1 auto; /* Allow list to grow and shrink */
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	/* Ensure list stays on the right */
+}
+
+.widget_custom_html .services-widget-list li {
+	margin-bottom: 8px; /* Space between list items */
+	position: relative; /* For pseudo-element positioning */
+	padding-left: 15px; /* Space for the bullet */
+}
+
+.widget_custom_html .services-widget-list li::before {
+	content: '•'; /* Bullet point */
+	position: absolute;
+	left: 0;
+	top: 0; /* Adjust vertical alignment if needed */
+	color: #fff; /* White bullet */
+}
+
+.widget_custom_html .services-widget-list li a {
+	color: #fff; /* White link text */
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.widget_custom_html .services-widget-list li a {
+	color: #fff; /* White link text */
+	text-decoration: none;
+	transition: color 0.3s ease, text-decoration 0.3s ease, padding-left 0.3s ease; /* Added transitions */
+	display: inline-block; /* Needed for padding transition */
+	position: relative; /* Needed for potential underline effect */
+}
+
+.widget_custom_html .services-widget-list li a:hover {
+	color: #ddd; /* Brighter white on hover */
+	padding-left: 5px; /* Slight indent on hover */
+	/* Optional: Add an underline effect */
+	/* text-decoration: underline; */
+}
+
+/* Styling for nested items/details within the IT list */
+.widget_custom_html .services-widget-list .service-details {
+	font-size: 0.9em;
+	color: #ccc; /* Slightly dimmer text for details */
+	padding-left: 10px; /* Indent details */
+	display: block; /* Ensure details are on a new line */
+	margin-top: 4px; /* Space above details */
+}
+
+/*--------------------------------------------------------------
+# Single Post Page Styles
+--------------------------------------------------------------*/
+body.single-post .site-content {
+    /* Example background: Light gradient */
+    background-image: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    padding: 30px; /* Add padding if needed */
+    border-radius: 5px; /* Optional rounded corners */
+}
+
+.single-post-main {
+    background-color: #fff; /* White background for the main content box */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for the content box */
+    /* flex: 3; */ /* Flex basis is now handled above */
+}
+
+.single-post-article {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+    padding: 20px; /* Add padding inside the article if desired */
+    border-radius: 5px; /* Optional rounded corners for the article */
+    margin-bottom: 20px; /* Space below the article */
+}
+
+/* Enhanced Single Post Article Hover */
+.single-post-article:hover {
+    transform: translateY(-6px); /* Increased lift */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+/* Hover effect for links within post content */
+.single-post .entry-content a {
+    color: #007bff; /* Standard link color */
+    text-decoration: none;
+    position: relative; /* For pseudo-element underline */
+    transition: color 0.3s ease;
+}
+
+.single-post .entry-content a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #007bff;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+.single-post .entry-content a:hover {
+    color: #0056b3; /* Darker blue on hover */
+}
+
+.single-post .entry-content a:hover::after {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+
+/* Adjust meta info spacing if needed */
+.single-post .entry-meta {
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.single-post .entry-meta span {
+    margin-right: 15px;
+}
+
+.single-post .entry-footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.single-post .tag-links a {
+    display: inline-block;
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 3px 8px;
+    margin-right: 5px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.single-post .tag-links a:hover {
+    background-color: #0d6efd;
+    color: #fff;
+}
+/* Specific styling for category list widget */
+.widget_categories ul li {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Style post entries in the category view */
+.category-main .entry-header {
+    margin-bottom: 10px; /* Add space below header */
+}
+
+.category-main .entry-header .entry-title {
+    margin-bottom: 5px; /* Space between title and meta */
+}
+
+.category-main .entry-header .entry-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth transition for hover */
+}
+.category-main .entry-header .entry-title a:hover {
+    color: #0d6efd; /* Use theme blue color for hover */
+}
+
+/* General Post/Page Title Link Hover */
+.site-main .entry-title a { /* Applies to linked titles in loops */
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.site-main .entry-title a:hover {
+    color: #0d6efd; /* Theme blue on hover */
+}
+
+
+.category-main .entry-meta {
+    font-size: 0.85em;
+    color: #777; /* Grey color for meta text */
+    text-transform: uppercase; /* Match screenshot style */
+    letter-spacing: 0.5px;
+}
+
+.category-main .entry-meta .byline,
+.category-main .entry-meta .posted-on {
+    margin-right: 15px; /* Space between date and author */
+}
+
+.category-main .entry-meta a {
+    color: #777; /* Keep meta links grey */
+    text-decoration: none;
+}
+
+.category-main .entry-meta a:hover {
+    color: #333; /* Darken meta links on hover */
+    text-decoration: underline;
+}
+
+.category-main .entry-summary {
+    margin-top: 15px; /* Adjusted margin */
+    color: #555;
+}
+.category-main article {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover */
+}
+
+/* Add hover effect for posts */
+.category-main article:hover {
+    transform: translateY(-5px); /* Slight lift effect */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.category-main article:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+/*--------------------------------------------------------------
+# General Link Hover Effects
+--------------------------------------------------------------*/
+.site-main a:not(.button):not(.entry-title a):not(.entry-meta a):not(.wp-block-button__link) { /* Target general links, exclude specific ones */
+    color: #0d6efd; /* Use theme blue */
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+.site-main a:not(.button):not(.entry-title a):not(.entry-meta a):not(.wp-block-button__link):hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
+/*--------------------------------------------------------------
+# Responsive Navigation
+--------------------------------------------------------------*/
+.menu-toggle,
+.menu-close {
+    display: none; /* Hide toggle and close button by default */
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 24px; /* Adjust size as needed */
+    line-height: 1;
+}
+
+.menu-toggle {
+    /* Style your hamburger icon container */
+    margin-left: auto; /* Push it to the right */
+     margin-right: 20px;
+}
+
+.hamburger-icon {
+    /* Basic hamburger icon using spans or background images */
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #333; /* Adjust color */
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #333; /* Adjust color */
+    transition: transform 0.3s ease;
+}
+
+.hamburger-icon::before {
+    top: -8px;
+}
+
+.hamburger-icon::after {
+    bottom: -8px;
+}
+
+
+/* Styles for the mobile menu container */
+.mobile-menu-container {
+    /* Default styles for larger screens - ensure it blends seamlessly */
+    display: flex; /* Use flex to align nav and button */
+    align-items: center;
+     margin-left: 40px;
+}
+
+.mobile-menu-container .main-navigation,
+.mobile-menu-container .header-button {
+    /* Ensure they are visible on larger screens within the container */
+    display: block;
+}
+.responsive-menu-header{
+    display: none;
+}
+
+/* Media Query for Tablets and Mobile */
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+
+    .responsive-menu-header{
+        display: block;
+    }
+    .logo_link{
+        text-decoration: none;
+    }
+    .site-header {
+        /* Adjust header padding or layout if needed */
+        padding: 10px 15px;
+        align-items: center; /* Vertically align items */
+    }
+     .site-branding .site_name {
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }
+
+    .menu-toggle {
+        display: block; /* Show hamburger button */
+        z-index: 99; /* Ensure it's above the overlay */
+        position: relative; /* Needed for z-index */
+    }
+
+     .mobile-menu-container .main-navigation ul {
+        display: flex;
+        flex-direction: column;
+        padding-top: 60px; /* Space for close button */
+         align-items: center;
+        list-style: none;
+        padding-left:0px;
+    }
+
+    .mobile-menu-container .main-navigation ul li{
+         width: 100%;
+    }
+
+      .mobile-menu-container .main-navigation ul li a{
+          display: block;
+         padding: 15px 0px;
+         text-align: center;
+         color: #333; /* Link color */
+         font-size: 18px;
+         width: 100%;
+         border-bottom: 1px solid #eee; /* Separator */
+    }
+
+     .mobile-menu-container .main-navigation ul li a:hover {
+        background-color: #f0f0f0; /* Hover effect */
+    }
+
+     .mobile-menu-container .header-button {
+        padding: 20px;
+         text-align: center;
+         margin-top: 20px;
+         width: 100%;
+    }
+
+     .mobile-menu-container .header-button a {
+        display: block;
+        width: 100%;
+        padding: 12px 30px;
+    }
+    .responsive-menu-header{
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 1.5em;
+    }
+
+    /* Hide original nav and button, show mobile container */
+    .mobile-menu-container {
+        display: block;
+        position: fixed; /* Or absolute */
+        top: 0;
+        right: 0;
+        width: 100%; /* Adjust width */
+        height: 100vh; /* Full height */
+        background-color: #fff; /* Background */
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1); /* Optional shadow */
+        transform: translateX(100%); /* Start off-screen */
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+        overflow-y: auto; /* Allow scrolling if content overflows */
+         margin-left:0px; /* Reset margin */
+    }
+
+    .mobile-menu-container.is-active {
+        transform: translateX(0); /* Slide in */
+        z-index: 999;
+    }
+
+    .menu-close {
+        display: block; /* Show close button only in mobile menu */
+        /* position: absolute; */
+        top: 15px;
+        right: 15px;
+        font-size: 30px; /* Make it easily clickable */
+        color: #333;
+        z-index: 1002;
+    }
+
+    /* Optional: Overlay for the rest of the page when menu is open */
+    body.mobile-menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Dimming overlay */
+        z-index: 999; /* Below the menu but above content */
+    }
+}
+
+/*--------------------------------------------------------------
+# Department Services Page Template (Enhanced Version)
+--------------------------------------------------------------*/
+
+/* Container for the entire department services page */
+.page-template-template-department-services .department-services-content-area {
+    max-width: 1100px; /* Keep wider content area */
+    margin: 40px auto; /* Increased vertical margin */
+    padding: 40px 50px; /* Increased padding */
+    background-color: #ffffff; /* White background */
+    border-radius: 10px; /* Slightly larger radius */
+    box-shadow: 0 5px 20px rgba(0, 87, 184, 0.1); /* Subtle blueish shadow */
+    overflow: hidden; /* Contain animations */
+}
+
+/* Style the main title */
+.department-services-header .department-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.8em; /* Slightly larger title */
+    font-weight: 600;
+    color: #1e3a5f; /* Darker blue for title */
+    padding-bottom: 15px;
+    border-bottom: 3px solid #007bff; /* Keep blue accent */
+    display: inline-block; /* Allow text-align center */
+    position: relative; /* For potential future pseudo-elements */
+}
+
+/* Style the container for the services list */
+.department-services-list {
+    line-height: 1.7;
+    color: #343a40; /* Darker gray text */
+}
+
+/* Styling for service sub-categories (H3) */
+.department-services-list h3 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6; /* Lighter gray border */
+    color: #007bff; /* Primary blue */
+    font-size: 1.8em;
+    font-weight: 500;
+}
+
+/* Styling for the service lists (UL) */
+.department-services-list ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 30px;
+}
+
+/* Styling for individual service items (LI) */
+.department-services-list ul li {
+    background-color: #f8f9fa; /* Light gray background for items */
+    margin-bottom: 15px;
+    padding: 20px 25px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef; /* Subtle border */
+    border-left: 5px solid #007bff; /* Blue accent border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    opacity: 0; /* Start hidden for animation */
+    transform: translateY(20px); /* Start slightly lower for animation */
+    animation: fadeInUp 0.5s ease forwards;
+    position: relative;
+    font-size: 1.05em;
+}
+
+/* Stagger the animation for list items */
+.department-services-list ul li:nth-child(1) { animation-delay: 0.1s; }
+.department-services-list ul li:nth-child(2) { animation-delay: 0.15s; }
+.department-services-list ul li:nth-child(3) { animation-delay: 0.2s; }
+.department-services-list ul li:nth-child(4) { animation-delay: 0.25s; }
+.department-services-list ul li:nth-child(5) { animation-delay: 0.3s; }
+/* Add more if needed, or use JS for larger lists */
+
+/* Hover effect for list items */
+.department-services-list ul li:hover {
+    transform: translateY(-3px) scale(1.01); /* Lift and slightly scale */
+    box-shadow: 0 8px 15px rgba(0, 87, 184, 0.12); /* Enhanced shadow on hover */
+    background-color: #ffffff; /* Change background to white on hover */
+    border-left-color: #0056b3; /* Darker blue accent */
+}
+
+/* Define the fadeInUp animation */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Styling for nested lists (if any) */
+.department-services-list ul ul {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding-left: 25px; /* Indent nested list */
+    list-style-type: initial; /* Use default bullets or circles */
+}
+
+.department-services-list ul ul li {
+    background-color: transparent;
+    border: none;
+    padding: 8px 0;
+    margin-bottom: 8px;
+    font-size: 0.98em;
+    color: #495057; /* Slightly lighter text for nested items */
+    animation: none; /* No animation for nested items */
+    opacity: 1;
+    transform: none;
+    border-left: 3px solid #6c757d; /* Gray accent for nested */
+    padding-left: 15px;
+}
+
+.department-services-list ul ul li:hover {
+    transform: none;
+    box-shadow: none;
+    background-color: transparent;
+    border-left-color: #343a40; /* Darker gray on hover */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .page-template-template-department-services .department-services-content-area {
+        padding: 30px 40px;
+    }
+    .department-services-header .department-title {
+        font-size: 2.5em;
+    }
+    .department-services-list h3 {
+        font-size: 1.6em;
+    }
+}
+
+@media (max-width: 767px) {
+    .page-template-template-department-services .department-services-content-area {
+        margin: 20px auto;
+        padding: 25px 20px; /* Adjust padding for mobile */
+        border-radius: 5px;
+    }
+
+    .department-services-header .department-title {
+        font-size: 2.1em;
+        margin-bottom: 30px;
+    }
+
+    .department-services-list h3 {
+        font-size: 1.5em;
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
+    .department-services-list ul li {
+        padding: 15px 20px;
+        font-size: 1em;
+    }
+
+     /* Less dramatic hover on mobile if desired */
+    .department-services-list ul li:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(0, 87, 184, 0.1);
+    }
+}
+
+/*--------------------------------------------------------------
+# Mega Menu Styles
+--------------------------------------------------------------*/
+
+/* Hide sub-menus by default */
+.main-navigation ul ul {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%; /* Position below parent */
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    padding: 0;
+    margin: 0;
+    min-width: 200px; /* Default width for simple dropdowns */
+    z-index: 1000;
+    border-radius: 0 0 5px 5px;
+}
+
+.main-navigation ul li:hover > ul {
+    /* Basic dropdown display on hover (will be overridden for mega menu) */
+     /* display: block; Let JS handle this */
+}
+
+.main-navigation ul ul li {
+    width: 100%;
+    margin: 0;
+    border: none;
+}
+
+.main-navigation ul ul li a {
+    padding: 12px 20px;
+    display: block;
+    white-space: nowrap;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main-navigation ul ul li:last-child a {
+    border-bottom: none;
+}
+
+.main-navigation ul ul li a:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+    border-bottom-color: #f0f0f0; /* Keep border color consistent */
+}
+
+/* Mega Menu Specifics */
+li.menu-item-has-children.services-mega-menu {
+    position: static; /* Important: Allows mega menu full width relative to header */
+}
+
+.mega-menu-panel {
+    display: none; /* Hidden by default, shown by JS */
+    position: absolute;
+    top: 100%; /* Position below the header */
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    z-index: 999;
+    padding: 30px 40px;
+    border-top: 1px solid #eee;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.mega-menu-panel.is-active {
+    display: flex; /* Use flex for columns */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Columns within the mega menu */
+.mega-menu-column {
+    padding: 0 20px;
+    min-width: 200px; /* Minimum width for each column */
+    border-right: 1px solid #eee;
+    /* Flex properties will be controlled by JS adding classes or direct style */
+}
+
+.mega-menu-column:last-child {
+    border-right: none;
+}
+
+.mega-menu-column h4 {
+    font-size: 1.1em;
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.mega-menu-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block; /* Override default display:none for sub-sub-menus */
+    position: static; /* Override absolute positioning */
+    box-shadow: none;
+    background-color: transparent;
+    min-width: auto;
+    border-radius: 0;
+}
+
+.mega-menu-column ul li {
+    width: auto;
+    border: none;
+}
+
+.mega-menu-column ul li a {
+    padding: 8px 0px; /* Simpler padding */
+    color: #333;
+    border-bottom: none; /* No borders */
+    font-size: 0.95em;
+    display: flex; /* Align icon and text */
+    align-items: center;
+    justify-content: space-between; /* Push arrow to right */
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mega-menu-column ul li a:hover {
+    color: #0056b3; /* Darker blue */
+    background-color: transparent;
+    padding-left: 5px; /* Indent on hover */
+}
+
+/* Arrow for items with further sub-menus */
+.mega-menu-column ul li.menu-item-has-children > a::after {
+    content: '›'; /* Right arrow */
+    font-size: 1.2em;
+    margin-left: 8px;
+    font-weight: bold;
+    color: #aaa;
+}
+
+/* Specific styling for Level 3 detailed list */
+.detailed-service-list li a {
+    font-size: 0.9em;
+    padding: 5px 0;
+    color: #555;
+}
+
+.detailed-service-list li a:hover {
+    color: #0056b3;
+}
+
+
+/* Hide mega menu on mobile - rely on burger menu */
+@media (max-width: 768px) {
+    .mega-menu-panel {
+        display: none !important; /* Force hide */
+    }
+     /* Reset centering for mobile, rely on burger menu flow */
+    .site-header {
+        justify-content: space-between;
+    }
+    .mobile-menu-container {
+         /* Styles for burger are handled separately */
+         /* We need to hide the desktop nav inside this container */
+         display: none;
+    }
+     .main-navigation {
+         display: none; /* Hide desktop nav container */
+     }
+
+     .menu-toggle {
+         display: block; /* Ensure burger is visible */
+     }
+}
+
+/*--------------------------------------------------------------
+# Single Post Responsive & Comment Styling
+--------------------------------------------------------------*/
+
+/* --- Comment Box Beautification --- */
+
+/* General Comments Area */
+#comments {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+}
+
+#comments .comments-title,
+#reply-title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Comment List */
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.comment-list li.comment {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #e9e9e9;
+    border-left: 4px solid #007bff; /* Accent border */
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease;
+}
+
+.comment-list li.comment:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.comment-author .avatar {
+    float: left;
+    margin-right: 15px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+}
+
+.comment-author .fn { /* Author name */
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+.comment-author .fn a {
+    color: #333;
+    text-decoration: none;
+}
+.comment-author .fn a:hover {
+    color: #007bff;
+}
+
+.comment-metadata {
+    font-size: 0.85em;
+    color: #777;
+    margin-bottom: 10px;
+}
+.comment-metadata a {
+    color: #777;
+    text-decoration: none;
+}
+.comment-metadata a:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+.comment-content {
+    clear: both; /* Clear float from avatar */
+    padding-top: 10px;
+    line-height: 1.6;
+}
+.comment-content p {
+    margin-bottom: 10px;
+}
+
+.reply a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.85em;
+    color: #007bff;
+    text-decoration: none;
+    padding: 3px 8px;
+    border: 1px solid #007bff;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.reply a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Nested Comments */
+.comment-list .children {
+    list-style: none;
+    padding-left: 30px; /* Indent replies */
+    margin-top: 20px;
+}
+
+/* Comment Form */
+#respond {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 5px;
+    border: 1px solid #e9ecef;
+}
+
+.comment-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    transition: border-color 0.3s ease;
+}
+
+.comment-form input[type="text"]:focus,
+.comment-form input[type="email"]:focus,
+.comment-form input[type="url"]:focus,
+.comment-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.comment-form .comment-notes,
+.comment-form .logged-in-as {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.comment-form .form-submit input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.comment-form .form-submit input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* --- Responsiveness for Small Devices (< 530px) --- */
+@media (max-width: 530px) {
+    /* Make featured image full width */
+    .single-post-thumbnail {
+        width: 100%;
+        height: auto; /* Adjust height automatically */
+        max-height: 250px; /* Optional max height */
+        margin-bottom: 15px;
+    }
+
+    /* Ensure comment form elements don't overflow */
+    #respond {
+        padding: 20px;
+    }
+
+    .comment-form input[type="text"],
+    .comment-form input[type="email"],
+    .comment-form input[type="url"],
+    .comment-form textarea {
+        padding: 10px;
+        font-size: 0.95em; /* Slightly smaller font */
+    }
+
+    .comment-form .form-submit input[type="submit"] {
+        padding: 10px 20px;
+        width: 100%; /* Make button full width */
+    }
+
+    /* Ensure comment content wraps */
+    .comment-content {
+        word-wrap: break-word; /* Break long words/URLs */
+        overflow-wrap: break-word; /* Standard property */
+    }
+
+    .comment-list li.comment {
+        padding: 15px;
+    }
+
+    .comment-author .avatar {
+        width: 40px; /* Smaller avatar */
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .comment-list .children {
+        padding-left: 15px; /* Reduce indent for nested comments */
+    }
+}

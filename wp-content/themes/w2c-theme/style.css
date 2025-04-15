@@ -33,8 +33,7 @@ body {
 }
 
 .site-branding {
-    flex: 1 0 auto; /* Allow logo to take space but not shrink */
-    /* max-width needed? Maybe not if mobile-menu-container also grows */
+    flex: 0 0 auto; /* Don't allow logo area to grow/shrink excessively */
 }
 
 .site-branding .site-title {
@@ -55,61 +54,62 @@ body {
     color: #007bff; /* Change title color on hover */
 }
 
-.mobile-menu-container {
+/* Desktop Navigation Container */
+.desktop-navigation-container {
     display: flex;
-    justify-content: flex-end; /* Align items (nav, button) to the right within this container */
+    justify-content: center;
     align-items: center;
-    flex: 1 1 auto; /* Allow this container to grow and shrink */
-    margin-left: 0; /* Reset margin */
+    margin-left: 20px; /* Add some space between logo and nav */
 }
 
 .main-navigation {
-    /* This will now be centered because .site-branding and .mobile-menu-container flank it */
-    /* Optional: Add specific margins if needed for fine-tuning */
+    /* Styles for the nav element itself */
     margin: 0 20px; /* Add some space around the nav */
     flex-shrink: 0; /* Prevent nav from shrinking too much */
 }
 
-.main-navigation ul {
+/* Styles for the primary desktop menu UL */
+#site-navigation-desktop ul#primary-menu-desktop {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex; /* Arrange menu items horizontally */
 }
 
-.main-navigation ul li {
+#site-navigation-desktop ul#primary-menu-desktop > li { /* Target only top-level items for spacing */
     margin: 0 15px; /* Spacing between menu items */
+    position: relative; /* For dropdown positioning */
 }
 
-.main-navigation ul li a {
+#site-navigation-desktop ul li a {
     text-decoration: none;
     color: #333; /* Adjust link color */
     font-weight: 500; /* Adjust font weight */
     padding-bottom: 5px; /* Add some space for the underline */
     border-bottom: 2px solid transparent; /* Placeholder for underline */
     transition: border-bottom-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+    display: block; /* Ensure link takes up space */
 }
 
-.main-navigation ul li a:hover {
+#site-navigation-desktop ul li a:hover {
     color: #007bff; /* Blue color on hover */
     border-bottom-color: #007bff; /* Blue underline on hover */
 }
 
 /* Style for dropdown arrows if your menu has sub-items */
-.main-navigation .menu-item-has-children > a::after {
+#site-navigation-desktop .menu-item-has-children > a::after {
     content: ' ▼'; /* Simple dropdown indicator */
     font-size: 0.7em;
     margin-left: 5px;
 }
 
-/* Ensure the header button stays on the far right */
-.header-button {
-    margin-left: auto; /* Push button to the end of the mobile-menu-container */
+/* Desktop Header Button */
+ .header-button {
     flex-shrink: 0;
 }
 
-.header-button .button {
-    width: 100%;
+ .header-button .button {
+    /* width: 100%; */ /* Let button size naturally */
     padding: 10px 20px;
     background-color: #007bff; /* Blue background like the image */
     color: #fff; /* White text */
@@ -117,15 +117,18 @@ body {
     border-radius: 5px; /* Rounded corners */
     font-weight: bold;
     transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent button text wrapping */
 }
 
-.header-button .button:hover {
+ .header-button .button:hover {
     background-color: #0056b3; /* Darker blue on hover */
 }
+
 .logo_link{
     display: flex;
     align-items: center;
     gap: 10px;
+    text-decoration: none; /* Ensure logo link isn't underlined */
 }
 .logo{
     width: 4rem;
@@ -150,48 +153,43 @@ body {
 .content-sidebar-wrap {
     display: flex;
     gap: 30px; /* Space between content and sidebar */
-    /* background-color: #007bff; */ /* Replaced with gradient */
     background-color: #0d6efd; /* Base blue color */
-    background-image: linear-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px), /* Increased opacity and line width */
-                      linear-gradient(90deg, rgba(255, 255, 255, 0.15) 2px, transparent 2px); /* Increased opacity and line width */
-    background-size: 40px 40px; /* Grid block size remains the same */
-    padding: 30px; /* Padding around the content and sidebar */
-    color: #fff; /* Default text color for this section */
-    /* Ensure flex wrap is enabled if needed on smaller screens */
-    /* flex-wrap: wrap; */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px),
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.15) 2px, transparent 2px);
+    background-size: 40px 40px;
+    padding: 30px;
+    color: #fff;
 }
 
 /* New Left Sidebar Area */
 .widget-area-left {
-    flex: 1.2; /* Increased flex basis */
-    order: 1; /* Position on the left */
-    /* Add specific styling if different from right sidebar */
+    flex: 1.2;
+    order: 1;
 }
 
 .category-main,
 .single-post-main,
-.index-main { /* Added .index-main and target main content areas */
-    flex: 2.1; /* Decreased flex basis to give sidebars more relative space */
-    background-color: #fff; /* White background for content area */
+.index-main {
+    flex: 2.1;
+    background-color: #fff;
     padding: 20px;
     border-radius: 5px;
-    color: #333; /* Reset text color for content */
-    order: 2; /* Position in the middle */
+    color: #333;
+    order: 2;
 }
 
 .widget-area { /* Right Sidebar */
-    flex: 1.2; /* Increased flex basis */
-    /* Sidebar widgets will inherit the blue background */
-    order: 3; /* Position on the right */
+    flex: 1.2;
+    order: 3;
 }
 
 /* Style the widgets in the sidebar */
 .widget-area .widget {
-    background-color: #fff; /* White background for widgets */
+    background-color: #fff;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
-    color: #333; /* Reset text color for widgets */
+    color: #333;
 }
 
 .widget-area .widget-title {
@@ -200,12 +198,12 @@ body {
     font-size: 1.2em;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .widget-area .widget:hover {
-    transform: translateY(-3px); /* Slight lift effect for widgets */
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); /* Subtle shadow for widgets */
+    transform: translateY(-3px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }
 
 .widget-area ul {
@@ -214,18 +212,20 @@ body {
     margin: 0;
 }
 
+/* Removed obsolete Font Awesome styles */
+
 .widget-area ul li {
     margin-bottom: 10px;
 }
 
 .widget-area ul li a {
     text-decoration: none;
-    color: #007bff; /* Blue links */
-    transition: color 0.3s ease, text-decoration 0.3s ease; /* Add transition */
+    color: #007bff;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
 .widget-area ul li a:hover {
-    color: #0056b3; /* Darker blue on hover */
+    color: #0056b3;
     text-decoration: underline;
 }
 
@@ -237,22 +237,22 @@ body {
 /* Tablet View (e.g., <= 992px) */
 @media (max-width: 992px) {
     .content-sidebar-wrap {
-        flex-direction: column; /* Stack content and sidebars */
+        flex-direction: column;
         gap: 20px;
         padding: 20px;
     }
 
     .widget-area-left,
-    .widget-area { /* Both sidebars */
-        order: 1; /* Move sidebars below content */
-        flex-basis: auto; /* Reset flex basis */
+    .widget-area {
+        order: 1;
+        flex-basis: auto;
     }
 
     .category-main,
     .single-post-main,
     .index-main {
-        order: 2; /* Ensure main content is first */
-        flex-basis: auto; /* Reset flex basis */
+        order: 2;
+        flex-basis: auto;
     }
 
     .footer-widgets-wrap {
@@ -260,61 +260,276 @@ body {
     }
 
     .footer-widget {
-        min-width: calc(50% - 20px); /* Aim for two columns */
+        min-width: calc(50% - 20px);
         flex-basis: calc(50% - 20px);
     }
 
     .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         padding: 15px 20px;
     }
 
-    .main-navigation ul li {
-        margin: 0 10px;
+    /* --- Start Mobile Menu Logic (Apply from 992px downwards) --- */
+
+    /* Hide desktop navigation */
+    .desktop-navigation-container {
+        display: none;
     }
+    .site-header .header-button{
+        display: none;
+    }
+
+    /* Show hamburger toggle */
+    .menu-toggle {
+        display: block; /* Show hamburger button */
+        background: none;
+        border: 1px solid #eee; /* Lighter border like image */
+        padding: 20px 10px; /* Padding */
+        cursor: pointer;
+        font-size: 24px; /* Icon size */
+        line-height: 1;
+        margin-left: auto; /* Push it to the right */
+        margin-right: 0;
+        z-index: 100;
+        position: relative;
+        border-radius: 4px; /* Rounded corners like image */
+    }
+
+    .hamburger-icon {
+        display: block;
+        width: 22px; /* Match image */
+        height: 2px; /* Match image */
+        background-color: #333; /* Icon color */
+        position: relative;
+        transition: background-color 0.3s ease;
+    }
+
+    .hamburger-icon::before,
+    .hamburger-icon::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px; /* Match image */
+        background-color: #333; /* Icon color */
+        transition: transform 0.3s ease;
+    }
+
+    .hamburger-icon::before {
+        top: -6px; /* Adjust spacing like image */
+    }
+
+    .hamburger-icon::after {
+        bottom: -6px; /* Adjust spacing like image */
+    }
+
+    /* Style the mobile menu panel (#mobile-menu-panel.mobile-menu-container) */
+    #mobile-menu-panel.mobile-menu-container {
+        display: none; /* Hide by default */
+        position: fixed;
+        top: 3rem;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #fff;
+        box-shadow: -3px 0 8px rgba(0,0,0,0.15); /* Slightly stronger shadow */
+        transform: translateX(100%); /* Start off-screen */
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+        overflow-y: auto;
+        margin-left: 0; /* Reset margin */
+    }
+
+    #mobile-menu-panel.mobile-menu-container.is-active {
+        display: block; /* Show when active */
+        transform: translateX(0); /* Slide in */
+    }
+    .mobile-menu-container .header-button{
+        display: block;
+    }
+
+    /* Styles for elements *inside* the panel */
+    #mobile-menu-panel .responsive-menu-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px; /* Padding */
+        border-bottom: 1px solid #eee; /* Border like image */
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        z-index: 1001;
+        border-bottom: 2px solid black;
+    }
+
+    #mobile-menu-panel .responsive-menu-header .logo_link {
+        text-decoration: none;
+        gap: 8px;
+    }
+    #mobile-menu-panel .responsive-menu-header .logo {
+        width: 3rem; /* Adjust as needed */
+    }
+    #mobile-menu-panel .responsive-menu-header .site_name {
+        font-size: 1.2rem; /* Adjust as needed */
+        color: #000;
+        font-weight: 600;
+    }
+
+    #mobile-menu-panel .menu-close {
+        display: block; /* Show close button */
+        font-size: 24px; /* Match image style */
+        color: #555; /* Match image style */
+        background: none;
+        border: none;
+        padding: 0;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+     /* Style the navigation list inside the panel */
+     #mobile-menu-panel .main-navigation {
+         margin: 0; /* Reset margin */
+         width: 100%;
+     }
+     #mobile-menu-panel .main-navigation ul#primary-menu-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #mobile-menu-panel .main-navigation ul#primary-menu-mobile li {
+         width: 100%;
+         margin: 0;
+         border-bottom: 1px solid #eee; /* Separator line */
+    }
+     #mobile-menu-panel .main-navigation ul#primary-menu-mobile li:last-child {
+         border-bottom: none;
+     }
+
+      #mobile-menu-panel .main-navigation ul#primary-menu-mobile li a {
+          display: block;
+         padding: 15px 20px; /* Padding like image */
+         text-align: left;
+         color: #333; /* Text color */
+         font-size: 16px; /* Text size */
+         width: 100%;
+         text-decoration: none;
+         border-bottom: none; /* Border is on the LI */
+         border-left: none; /* No left border needed */
+         transition: background-color 0.2s ease, color 0.2s ease; /* Simpler transition */
+    }
+
+     #mobile-menu-panel .main-navigation ul#primary-menu-mobile li a:hover {
+        background-color: #f8f9fa; /* Light background on hover */
+        color: #007bff; /* Highlight color */
+        /* Remove border-left hover */
+    }
+
+    /* Add submenu indicator */
+    #mobile-menu-panel .main-navigation ul#primary-menu-mobile .menu-item-has-children > a {
+        position: relative; /* Needed for absolute positioning of arrow */
+    }
+    #mobile-menu-panel .main-navigation ul#primary-menu-mobile .menu-item-has-children > a::after {
+        content: '>'; /* Arrow character */
+        position: absolute;
+        right: 20px; /* Position on the right */
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1em; /* Adjust size */
+        color: #aaa; /* Arrow color */
+        font-weight: bold;
+    }
+
+
+     /* Style the button inside the panel */
+     #mobile-menu-panel .header-button {
+        padding: 30px 20px; /* Padding around button */
+         text-align: center;
+         margin-top: auto; /* Push button towards bottom if panel scrolls */
+         width: 100%;
+         box-sizing: border-box;
+    }
+
+     #mobile-menu-panel .header-button a.button {
+        display: block; /* Make button full width */
+        width: 100%;
+        max-width: none; /* No max-width */
+        padding: 14px 20px; /* Adjust padding like image */
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+     #mobile-menu-panel .header-button a.button:hover {
+         background-color: #0056b3;
+     }
+
+    /* Body overlay */
+     body.mobile-menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        transition: opacity 0.3s ease;
+        opacity: 1;
+    }
+     body:not(.mobile-menu-open)::before {
+         opacity: 0;
+         visibility: hidden;
+         transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+     }
+
+     /* Hide mega menu panel on smaller screens */
+    .mega-menu-panel {
+        display: none !important;
+    }
+
+     /* --- End Mobile Menu Logic --- */
 }
 
 /* Mobile View (e.g., <= 767px) */
 @media (max-width: 767px) {
+    /* Adjustments specific to smaller mobile screens if needed */
     .site-header {
-        /* Stack header items */
-        gap: 15px;
-        padding: 15px;
+        padding: 10px 15px; /* Slightly less padding */
     }
 
-    .main-navigation ul {
-        flex-direction: column; /* Stack nav items */
-        align-items: center;
-        gap: 10px;
-    }
-    .main-navigation ul li {
-        margin: 0;
-    }
-
-    .header-button {
-        margin-top: 10px;
+    #mobile-menu-panel.mobile-menu-container {
+        width: 100%; /* Slightly wider panel on small screens */
     }
 
     .category-main .post-item-wrapper,
     .index-main .post-item-wrapper {
-        flex-direction: column; /* Stack image and text */
-        min-height: auto; /* Reset min-height */
+        flex-direction: column;
+        min-height: auto;
     }
 
     .category-main .post-thumbnail,
     .index-main .post-thumbnail {
-        flex-basis: auto; /* Reset flex basis */
-        width: 100%; /* Make image full width */
-        height: 200px; /* Adjust height as needed */
+        flex-basis: auto;
+        width: 100%;
+        height: 200px;
         margin-bottom: 15px;
     }
 
     .footer-widgets-wrap {
-        flex-direction: column; /* Stack footer columns */
+        flex-direction: column;
         gap: 30px;
     }
 
     .footer-widget {
-        min-width: 100%; /* Full width */
+        min-width: 100%;
         flex-basis: 100%;
     }
 
@@ -328,9 +543,9 @@ body {
     }
 
     .single-post-thumbnail {
-        width: 100%; /* Make image full width */
-        height: auto; /* Adjust height automatically */
-        max-height: 250px; /* Optional max height */
+        width: 100%;
+        height: auto;
+        max-height: 250px;
     }
 }
 
@@ -338,25 +553,25 @@ body {
 # Footer Styles
 --------------------------------------------------------------*/
 .site-footer {
-    background-color: #0a192f; /* Dark blue background from image */
-    color: #a8b2d1; /* Light grey/blue text color from image */
-    padding: 50px 30px 0; /* Padding top/bottom, left/right */
+    background-color: #0a192f;
+    color: #a8b2d1;
+    padding: 50px 30px 0;
     font-size: 0.95em;
     line-height: 1.6;
 }
 
 .footer-widgets-wrap {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 40px; /* Space between columns */
-    max-width: 1200px; /* Optional: constrain width */
-    margin: 0 auto; /* Center the wrap */
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
     padding-bottom: 40px;
 }
 
 .footer-widget {
-    flex: 1; /* Allow columns to share space */
-    min-width: 220px; /* Minimum width before wrapping */
+    flex: 1;
+    min-width: 220px;
 }
 
 /* Column 1: Logo & Description */
@@ -369,54 +584,53 @@ body {
 }
 
 .footer-col-1 .footer-logo-img {
-    max-height: 40px; /* Adjust logo size */
+    max-height: 40px;
     width: auto;
-    border-radius: 4px; /* Match logo style */
+    border-radius: 4px;
 }
 
 .footer-col-1 .footer-site-title {
     font-size: 1.4em;
     font-weight: bold;
-    color: #fff; /* White color for title */
+    color: #fff;
 }
 
 .footer-col-1 .footer-description {
     margin-bottom: 20px;
-    color: #8892b0; /* Slightly different grey for description */
+    color: #8892b0;
 }
 
 .footer-col-1 .footer-social-icons a {
-    display: inline-block;
+    display: inline-flex; /* Use flexbox for centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
     margin-right: 10px;
     color: #a8b2d1;
     text-decoration: none;
-    /* Replace span with actual icons (e.g., Font Awesome) */
-    /* Example using placeholders */
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     width: 36px;
     height: 36px;
-    line-height: 36px;
-    text-align: center;
+    /* line-height removed as flexbox handles centering */
+    /* text-align removed */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-.footer-col-1 .footer-social-icons a .social-icon {
-    /* Hide text if using icon font */
-     /* font-size: 0; */
-     /* For placeholder text: */
-     font-size: 0.8em;
-     font-weight: bold;
+
+.footer-col-1 .footer-social-icons a svg.social-icon {
+    width: 1em; /* Control size via font-size of parent if needed */
+    height: 1em;
+    vertical-align: middle; /* Helps alignment */
 }
 
 
 .footer-col-1 .footer-social-icons a:hover {
-    background-color: #007bff; /* Blue hover like header button */
+    background-color: #007bff;
     color: #fff;
 }
 
 /* Columns 2, 3, 4: Titles & Lists */
 .footer-widget .widget-title {
-    color: #fff; /* White title */
+    color: #fff;
     font-size: 1.1em;
     margin-top: 0;
     margin-bottom: 20px;
@@ -444,25 +658,23 @@ body {
 }
 
 .footer-widget .footer-menu li a:hover {
-    color: #fff; /* White hover */
-    padding-left: 5px; /* Indent on hover */
+    color: #fff;
+    padding-left: 5px;
 }
 .footer-widget .footer-contact-info li a:hover {
-    color: #fff; /* White hover */
+    color: #fff;
 }
 
 
-/* Add arrow for menu items */
 .footer-widget .footer-menu li::before {
-    content: '>'; /* Arrow character */
+    content: '>';
     position: absolute;
-    left: -15px; /* Position arrow to the left */
+    left: -15px;
     color: #a8b2d1;
     font-weight: bold;
-    /* Adjust if using padding-left on li instead */
 }
 .footer-widget .footer-menu li {
-     padding-left: 15px; /* Make space for the arrow */
+     padding-left: 15px;
 }
 
 
@@ -472,19 +684,21 @@ body {
     align-items: center;
     gap: 8px;
 }
-.footer-col-4 .contact-icon {
-    /* Style placeholder or replace with actual icon */
-    color: #007bff; /* Blue icon color */
-    font-weight: bold; /* Placeholder style */
-    font-size: 0.9em; /* Placeholder style */
+
+.footer-col-4 .footer-contact-info li svg.contact-icon {
+    color: #007bff;
+    width: 1.1em; /* Adjust size as needed */
+    height: 1.1em;
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    vertical-align: middle; /* Align better with text */
 }
 
 .footer-col-4 .footer-contact-button {
     display: inline-block;
     margin-top: 15px;
     padding: 8px 18px;
-    background-color: #007bff; /* Blue background */
-    color: #fff; /* White text */
+    background-color: #007bff;
+    color: #fff;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
@@ -493,17 +707,17 @@ body {
 }
 
 .footer-col-4 .footer-contact-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
 }
 
 /* Footer Bottom Bar */
 .footer-bottom-bar {
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle top border */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 20px 30px;
-    margin-top: 30px; /* Space above the bottom bar */
+    margin-top: 30px;
     text-align: center;
     font-size: 0.9em;
-    color: #8892b0; /* Grey text */
+    color: #8892b0;
 }
 
 .footer-bottom-bar p {
@@ -514,14 +728,13 @@ body {
 /*--------------------------------------------------------------
 # Single Post Featured Image & Hover Effects
 --------------------------------------------------------------*/
-/* Updated Single Post Image Styles */
 .single-post-thumbnail {
-    width: 100%; /* Changed from 250px */
-    height: 320px; /* Kept fixed height as requested */
+    width: 100%;
+    height: 320px;
     overflow: hidden;
-    margin-bottom: 25px; /* Increased margin */
+    margin-bottom: 25px;
     border-radius: 5px;
-    position: relative; /* Needed for potential overlay or effects */
+    position: relative;
 }
 
 .single-post-thumbnail img {
@@ -530,12 +743,12 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease, filter 0.4s ease; /* Added filter transition */
+    transition: transform 0.4s ease, filter 0.4s ease;
 }
 
 .single-post-thumbnail:hover img {
-    transform: scale(1.05); /* Slightly zoom in */
-    filter: brightness(1.1); /* Slightly brighten */
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }
 
 
@@ -544,66 +757,64 @@ body {
 # Blog Index & Category Page Post Layout
 --------------------------------------------------------------*/
 .category-main .category-post-item,
-.index-main .index-post-item { /* Added .index-main selector */
-    /* Remove default bottom border if it interferes */
+.index-main .index-post-item {
     border-bottom: none;
     padding-bottom: 0;
-    margin-bottom: 40px; /* Add space between posts */
+    margin-bottom: 40px;
 }
 
-.category-main .post-item-wrapper {
+.category-main .post-item-wrapper,
+.index-main .post-item-wrapper { /* Added index-main */
     display: flex;
-    align-items: flex-start; /* Align items to the top */
-    gap: 20px; /* Space between image and text */
-    background-color: #f9f9f9; /* Light background for the post card */
+    align-items: flex-start;
+    gap: 20px;
+    background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    min-height: 200px; /* Minimum height for the card */
-    overflow: hidden; /* Ensure content doesn't overflow */
-    transition: box-shadow 0.3s ease; /* Add transition for existing hover */
+    min-height: 200px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
 }
 
 .category-main .post-item-wrapper:hover,
-.index-main .post-item-wrapper:hover { /* Added .index-main selector */
-     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Enhance shadow on hover */
-     /* Keep existing transform from .category-main article:hover if desired */
+.index-main .post-item-wrapper:hover {
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 
 .category-main .post-thumbnail,
-.index-main .post-thumbnail { /* Added .index-main selector */
-    flex: 0 0 250px; /* Fixed width for the image container */
-    height: 180px; /* Fixed height for the image container */
-    overflow: hidden; /* Hide parts of image that don't fit */
-    position: relative; /* Needed for overlay and hover effects */
-    border-radius: 5px; /* Rounded corners for the image container */
+.index-main .post-thumbnail {
+    flex: 0 0 250px;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
 }
 
 .category-main .post-thumbnail a,
-.index-main .post-thumbnail a { /* Added .index-main selector */
+.index-main .post-thumbnail a {
     display: block;
     width: 100%;
     height: 100%;
 }
 
 .category-main .post-thumbnail img,
-.index-main .post-thumbnail img { /* Added .index-main selector */
+.index-main .post-thumbnail img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Scale image to cover the container */
+    object-fit: cover;
     display: block;
-    transition: transform 0.4s ease; /* Smooth transition for hover */
+    transition: transform 0.4s ease;
 }
 
 .category-main .post-thumbnail:hover img,
-.index-main .post-thumbnail:hover img { /* Added .index-main selector */
-    transform: scale(1.1); /* Zoom effect on hover */
+.index-main .post-thumbnail:hover img {
+    transform: scale(1.1);
 }
 
-/* Optional: Style the overlay if you keep it */
 .category-main .post-thumbnail .thumbnail-overlay,
-.index-main .post-thumbnail .thumbnail-overlay { /* Added .index-main selector */
+.index-main .post-thumbnail .thumbnail-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -618,67 +829,54 @@ body {
 }
 
 .category-main .post-thumbnail:hover .thumbnail-overlay,
-.index-main .post-thumbnail:hover .thumbnail-overlay { /* Added .index-main selector */
+.index-main .post-thumbnail:hover .thumbnail-overlay {
     opacity: 1;
 }
 
 
 .category-main .post-content-wrap,
-.index-main .post-content-wrap { /* Added .index-main selector */
-    flex: 1; /* Allow text content to take remaining space */
+.index-main .post-content-wrap {
+    flex: 1;
     display: flex;
-    flex-direction: column; /* Stack header, summary, footer vertically */
+    flex-direction: column;
 }
 
 .category-main .post-content-wrap .entry-header,
-.index-main .post-content-wrap .entry-header { /* Added .index-main selector */
+.index-main .post-content-wrap .entry-header {
     margin-bottom: 10px;
 }
 
 .category-main .post-content-wrap .entry-summary,
-.index-main .post-content-wrap .entry-summary { /* Added .index-main selector */
-    flex-grow: 1; /* Allow summary to take available vertical space */
+.index-main .post-content-wrap .entry-summary {
+    flex-grow: 1;
     margin-bottom: 15px;
 }
 
 .category-main .post-content-wrap .read-more,
-.index-main .post-content-wrap .read-more { /* Added .index-main selector */
-    display: inline-block; /* Make it behave like a button */
-    margin-top: auto; /* Push to the bottom if needed, though flex-grow on summary helps */
-    align-self: flex-start; /* Align to the left */
-    /* Add button-like styling if desired */
-    /* background-color: #0d6efd; */
-    /* color: #fff; */
-    /* padding: 5px 10px; */
-    /* border-radius: 3px; */
-}
-
-/* Adjust existing hover on article if needed */
-.category-main article:hover,
-.index-main article:hover { /* Added .index-main selector */
-    transform: none; /* Remove lift effect if using wrapper hover */
-    box-shadow: none; /* Remove shadow if using wrapper hover */
+.index-main .post-content-wrap .read-more {
+    display: inline-block;
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 /* Custom Services Widget Styling */
 .widget_custom_html .services-widget-container {
-	display: flex; /* Use flexbox for layout */
-	flex-wrap: wrap; /* Allow wrapping if needed */
-	gap: 15px; /* Add space between title and list */
-	align-items: flex-start; /* Align items at the top */
-	margin-bottom: 1.5em; /* Add some space below the widget */
-	padding: 15px; /* Add padding inside the container */
-	background-color: #333; /* Dark background like the image */
-	color: #fff; /* White text */
-	border-radius: 5px; /* Rounded corners */
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	align-items: flex-start;
+	margin-bottom: 1.5em;
+	padding: 15px;
+	background-color: #333;
+	color: #fff;
+	border-radius: 5px;
 }
 
 .widget_custom_html .services-widget-title {
-	flex: 0 0 auto; /* Don't grow or shrink, base size on content */
+	flex: 0 0 auto;
 	font-weight: bold;
-	margin-right: 15px; /* Space between title and list */
-	font-size: 1.1em; /* Slightly larger title */
-	/* Ensure title stays on the left */
+	margin-right: 15px;
+	font-size: 1.1em;
 }
 .services-widget-title{
     font-size: 1.5rem !important;
@@ -687,93 +885,79 @@ body {
 }
 
 .widget_custom_html .services-widget-list {
-	flex: 1 1 auto; /* Allow list to grow and shrink */
+	flex: 1 1 auto;
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	/* Ensure list stays on the right */
 }
 
 .widget_custom_html .services-widget-list li {
-	margin-bottom: 8px; /* Space between list items */
-	position: relative; /* For pseudo-element positioning */
-	padding-left: 15px; /* Space for the bullet */
+	margin-bottom: 8px;
+	position: relative;
+	padding-left: 15px;
 }
 
 .widget_custom_html .services-widget-list li::before {
-	content: '•'; /* Bullet point */
+	content: '•';
 	position: absolute;
 	left: 0;
-	top: 0; /* Adjust vertical alignment if needed */
-	color: #fff; /* White bullet */
+	top: 0;
+	color: #fff;
 }
 
 .widget_custom_html .services-widget-list li a {
-	color: #fff; /* White link text */
+	color: #fff;
 	text-decoration: none;
-	transition: color 0.3s ease;
-}
-
-.widget_custom_html .services-widget-list li a {
-	color: #fff; /* White link text */
-	text-decoration: none;
-	transition: color 0.3s ease, text-decoration 0.3s ease, padding-left 0.3s ease; /* Added transitions */
-	display: inline-block; /* Needed for padding transition */
-	position: relative; /* Needed for potential underline effect */
+	transition: color 0.3s ease, text-decoration 0.3s ease, padding-left 0.3s ease;
+	display: inline-block;
+	position: relative;
 }
 
 .widget_custom_html .services-widget-list li a:hover {
-	color: #ddd; /* Brighter white on hover */
-	padding-left: 5px; /* Slight indent on hover */
-	/* Optional: Add an underline effect */
-	/* text-decoration: underline; */
+	color: #ddd;
+	padding-left: 5px;
 }
 
-/* Styling for nested items/details within the IT list */
 .widget_custom_html .services-widget-list .service-details {
 	font-size: 0.9em;
-	color: #ccc; /* Slightly dimmer text for details */
-	padding-left: 10px; /* Indent details */
-	display: block; /* Ensure details are on a new line */
-	margin-top: 4px; /* Space above details */
+	color: #ccc;
+	padding-left: 10px;
+	display: block;
+	margin-top: 4px;
 }
 
 /*--------------------------------------------------------------
 # Single Post Page Styles
 --------------------------------------------------------------*/
 body.single-post .site-content {
-    /* Example background: Light gradient */
     background-image: linear-gradient(to bottom, #f8f9fa, #e9ecef);
-    padding: 30px; /* Add padding if needed */
-    border-radius: 5px; /* Optional rounded corners */
+    padding: 30px;
+    border-radius: 5px;
 }
 
 .single-post-main {
-    background-color: #fff; /* White background for the main content box */
+    background-color: #fff;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for the content box */
-    /* flex: 3; */ /* Flex basis is now handled above */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .single-post-article {
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
-    padding: 20px; /* Add padding inside the article if desired */
-    border-radius: 5px; /* Optional rounded corners for the article */
-    margin-bottom: 20px; /* Space below the article */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
-/* Enhanced Single Post Article Hover */
 .single-post-article:hover {
-    transform: translateY(-6px); /* Increased lift */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Hover effect for links within post content */
 .single-post .entry-content a {
-    color: #007bff; /* Standard link color */
+    color: #007bff;
     text-decoration: none;
-    position: relative; /* For pseudo-element underline */
+    position: relative;
     transition: color 0.3s ease;
 }
 
@@ -791,7 +975,7 @@ body.single-post .site-content {
 }
 
 .single-post .entry-content a:hover {
-    color: #0056b3; /* Darker blue on hover */
+    color: #0056b3;
 }
 
 .single-post .entry-content a:hover::after {
@@ -800,7 +984,6 @@ body.single-post .site-content {
 }
 
 
-/* Adjust meta info spacing if needed */
 .single-post .entry-meta {
     margin-bottom: 20px;
     font-size: 0.9em;
@@ -832,78 +1015,74 @@ body.single-post .site-content {
     background-color: #0d6efd;
     color: #fff;
 }
-/* Specific styling for category list widget */
 .widget_categories ul li {
     display: flex;
     justify-content: space-between;
 }
 
-/* Style post entries in the category view */
 .category-main .entry-header {
-    margin-bottom: 10px; /* Add space below header */
+    margin-bottom: 10px;
 }
 
 .category-main .entry-header .entry-title {
-    margin-bottom: 5px; /* Space between title and meta */
+    margin-bottom: 5px;
 }
 
 .category-main .entry-header .entry-title a {
     color: #333;
     text-decoration: none;
-    transition: color 0.3s ease; /* Smooth transition for hover */
+    transition: color 0.3s ease;
 }
 .category-main .entry-header .entry-title a:hover {
-    color: #0d6efd; /* Use theme blue color for hover */
+    color: #0d6efd;
 }
 
-/* General Post/Page Title Link Hover */
-.site-main .entry-title a { /* Applies to linked titles in loops */
+.site-main .entry-title a {
     color: #333;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 .site-main .entry-title a:hover {
-    color: #0d6efd; /* Theme blue on hover */
+    color: #0d6efd;
 }
 
 
 .category-main .entry-meta {
     font-size: 0.85em;
-    color: #777; /* Grey color for meta text */
-    text-transform: uppercase; /* Match screenshot style */
+    color: #777;
+    text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .category-main .entry-meta .byline,
 .category-main .entry-meta .posted-on {
-    margin-right: 15px; /* Space between date and author */
+    margin-right: 15px;
 }
 
 .category-main .entry-meta a {
-    color: #777; /* Keep meta links grey */
+    color: #777;
     text-decoration: none;
 }
 
 .category-main .entry-meta a:hover {
-    color: #333; /* Darken meta links on hover */
+    color: #333;
     text-decoration: underline;
 }
 
 .category-main .entry-summary {
-    margin-top: 15px; /* Adjusted margin */
+    margin-top: 15px;
     color: #555;
 }
 .category-main article {
     margin-bottom: 30px;
     padding-bottom: 30px;
     border-bottom: 1px solid #eee;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Add hover effect for posts */
 .category-main article:hover {
-    transform: translateY(-5px); /* Slight lift effect */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .category-main article:last-child {
@@ -915,283 +1094,104 @@ body.single-post .site-content {
 /*--------------------------------------------------------------
 # General Link Hover Effects
 --------------------------------------------------------------*/
-.site-main a:not(.button):not(.entry-title a):not(.entry-meta a):not(.wp-block-button__link) { /* Target general links, exclude specific ones */
-    color: #0d6efd; /* Use theme blue */
+.site-main a:not(.button):not(.entry-title a):not(.entry-meta a):not(.wp-block-button__link) {
+    color: #0d6efd;
     text-decoration: none;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 .site-main a:not(.button):not(.entry-title a):not(.entry-meta a):not(.wp-block-button__link):hover {
-    color: #0056b3; /* Darker blue on hover */
+    color: #0056b3;
     text-decoration: underline;
 }
 
 /*--------------------------------------------------------------
-# Responsive Navigation
+# Responsive Navigation (Base - Hidden Toggle/Panel)
 --------------------------------------------------------------*/
 .menu-toggle,
 .menu-close {
     display: none; /* Hide toggle and close button by default */
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font-size: 24px; /* Adjust size as needed */
-    line-height: 1;
 }
 
-.menu-toggle {
-    /* Style your hamburger icon container */
-    margin-left: auto; /* Push it to the right */
-     margin-right: 20px;
+#mobile-menu-panel.mobile-menu-container {
+    display: none; /* Hide panel by default */
 }
 
-.hamburger-icon {
-    /* Basic hamburger icon using spans or background images */
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: #333; /* Adjust color */
-    position: relative;
-    transition: background-color 0.3s ease;
-}
-
-.hamburger-icon::before,
-.hamburger-icon::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #333; /* Adjust color */
-    transition: transform 0.3s ease;
-}
-
-.hamburger-icon::before {
-    top: -8px;
-}
-
-.hamburger-icon::after {
-    bottom: -8px;
-}
-
-
-/* Styles for the mobile menu container */
-.mobile-menu-container {
-    /* Default styles for larger screens - ensure it blends seamlessly */
-    display: flex; /* Use flex to align nav and button */
-    align-items: center;
-     margin-left: 40px;
-}
-
-.mobile-menu-container .main-navigation,
-.mobile-menu-container .header-button {
-    /* Ensure they are visible on larger screens within the container */
-    display: block;
-}
-.responsive-menu-header{
-    display: none;
-}
-
-/* Media Query for Tablets and Mobile */
-@media (max-width: 768px) { /* Adjust breakpoint as needed */
-
-    .responsive-menu-header{
-        display: block;
-    }
-    .logo_link{
-        text-decoration: none;
-    }
-    .site-header {
-        /* Adjust header padding or layout if needed */
-        padding: 10px 15px;
-        align-items: center; /* Vertically align items */
-    }
-     .site-branding .site_name {
-        font-size: 20px; /* Adjust font size for smaller screens */
-    }
-
-    .menu-toggle {
-        display: block; /* Show hamburger button */
-        z-index: 99; /* Ensure it's above the overlay */
-        position: relative; /* Needed for z-index */
-    }
-
-     .mobile-menu-container .main-navigation ul {
-        display: flex;
-        flex-direction: column;
-        padding-top: 60px; /* Space for close button */
-         align-items: center;
-        list-style: none;
-        padding-left:0px;
-    }
-
-    .mobile-menu-container .main-navigation ul li{
-         width: 100%;
-    }
-
-      .mobile-menu-container .main-navigation ul li a{
-          display: block;
-         padding: 15px 0px;
-         text-align: center;
-         color: #333; /* Link color */
-         font-size: 18px;
-         width: 100%;
-         border-bottom: 1px solid #eee; /* Separator */
-    }
-
-     .mobile-menu-container .main-navigation ul li a:hover {
-        background-color: #f0f0f0; /* Hover effect */
-    }
-
-     .mobile-menu-container .header-button {
-        padding: 20px;
-         text-align: center;
-         margin-top: 20px;
-         width: 100%;
-    }
-
-     .mobile-menu-container .header-button a {
-        display: block;
-        width: 100%;
-        padding: 12px 30px;
-    }
-    .responsive-menu-header{
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
-     padding: 1.5em;
-    }
-
-    /* Hide original nav and button, show mobile container */
-    .mobile-menu-container {
-        display: block;
-        position: fixed; /* Or absolute */
-        top: 0;
-        right: 0;
-        width: 100%; /* Adjust width */
-        height: 100vh; /* Full height */
-        background-color: #fff; /* Background */
-        box-shadow: -2px 0 5px rgba(0,0,0,0.1); /* Optional shadow */
-        transform: translateX(100%); /* Start off-screen */
-        transition: transform 0.3s ease-in-out;
-        z-index: 1000;
-        overflow-y: auto; /* Allow scrolling if content overflows */
-         margin-left:0px; /* Reset margin */
-    }
-
-    .mobile-menu-container.is-active {
-        transform: translateX(0); /* Slide in */
-        z-index: 999;
-    }
-
-    .menu-close {
-        display: block; /* Show close button only in mobile menu */
-        /* position: absolute; */
-        top: 15px;
-        right: 15px;
-        font-size: 30px; /* Make it easily clickable */
-        color: #333;
-        z-index: 1002;
-    }
-
-    /* Optional: Overlay for the rest of the page when menu is open */
-    body.mobile-menu-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Dimming overlay */
-        z-index: 999; /* Below the menu but above content */
-    }
-}
 
 /*--------------------------------------------------------------
 # Department Services Page Template (Enhanced Version)
 --------------------------------------------------------------*/
 
-/* Container for the entire department services page */
 .page-template-template-department-services .department-services-content-area {
-    max-width: 1100px; /* Keep wider content area */
-    margin: 40px auto; /* Increased vertical margin */
-    padding: 40px 50px; /* Increased padding */
-    background-color: #ffffff; /* White background */
-    border-radius: 10px; /* Slightly larger radius */
-    box-shadow: 0 5px 20px rgba(0, 87, 184, 0.1); /* Subtle blueish shadow */
-    overflow: hidden; /* Contain animations */
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 40px 50px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 87, 184, 0.1);
+    overflow: hidden;
 }
 
-/* Style the main title */
 .department-services-header .department-title {
     text-align: center;
     margin-bottom: 40px;
-    font-size: 2.8em; /* Slightly larger title */
+    font-size: 2.8em;
     font-weight: 600;
-    color: #1e3a5f; /* Darker blue for title */
+    color: #1e3a5f;
     padding-bottom: 15px;
-    border-bottom: 3px solid #007bff; /* Keep blue accent */
-    display: inline-block; /* Allow text-align center */
-    position: relative; /* For potential future pseudo-elements */
+    border-bottom: 3px solid #007bff;
+    display: inline-block;
+    position: relative;
 }
 
-/* Style the container for the services list */
 .department-services-list {
     line-height: 1.7;
-    color: #343a40; /* Darker gray text */
+    color: #343a40;
 }
 
-/* Styling for service sub-categories (H3) */
 .department-services-list h3 {
     margin-top: 40px;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #dee2e6; /* Lighter gray border */
-    color: #007bff; /* Primary blue */
+    border-bottom: 1px solid #dee2e6;
+    color: #007bff;
     font-size: 1.8em;
     font-weight: 500;
 }
 
-/* Styling for the service lists (UL) */
 .department-services-list ul {
     list-style: none;
     padding-left: 0;
     margin-bottom: 30px;
 }
 
-/* Styling for individual service items (LI) */
 .department-services-list ul li {
-    background-color: #f8f9fa; /* Light gray background for items */
+    background-color: #f8f9fa;
     margin-bottom: 15px;
     padding: 20px 25px;
     border-radius: 8px;
-    border: 1px solid #e9ecef; /* Subtle border */
-    border-left: 5px solid #007bff; /* Blue accent border */
+    border: 1px solid #e9ecef;
+    border-left: 5px solid #007bff;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    opacity: 0; /* Start hidden for animation */
-    transform: translateY(20px); /* Start slightly lower for animation */
+    opacity: 0;
+    transform: translateY(20px);
     animation: fadeInUp 0.5s ease forwards;
     position: relative;
     font-size: 1.05em;
 }
 
-/* Stagger the animation for list items */
 .department-services-list ul li:nth-child(1) { animation-delay: 0.1s; }
 .department-services-list ul li:nth-child(2) { animation-delay: 0.15s; }
 .department-services-list ul li:nth-child(3) { animation-delay: 0.2s; }
 .department-services-list ul li:nth-child(4) { animation-delay: 0.25s; }
 .department-services-list ul li:nth-child(5) { animation-delay: 0.3s; }
-/* Add more if needed, or use JS for larger lists */
 
-/* Hover effect for list items */
 .department-services-list ul li:hover {
-    transform: translateY(-3px) scale(1.01); /* Lift and slightly scale */
-    box-shadow: 0 8px 15px rgba(0, 87, 184, 0.12); /* Enhanced shadow on hover */
-    background-color: #ffffff; /* Change background to white on hover */
-    border-left-color: #0056b3; /* Darker blue accent */
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 8px 15px rgba(0, 87, 184, 0.12);
+    background-color: #ffffff;
+    border-left-color: #0056b3;
 }
 
-/* Define the fadeInUp animation */
 @keyframes fadeInUp {
     to {
         opacity: 1;
@@ -1199,12 +1199,11 @@ body.single-post .site-content {
     }
 }
 
-/* Styling for nested lists (if any) */
 .department-services-list ul ul {
     margin-top: 15px;
     margin-bottom: 5px;
-    padding-left: 25px; /* Indent nested list */
-    list-style-type: initial; /* Use default bullets or circles */
+    padding-left: 25px;
+    list-style-type: initial;
 }
 
 .department-services-list ul ul li {
@@ -1213,11 +1212,11 @@ body.single-post .site-content {
     padding: 8px 0;
     margin-bottom: 8px;
     font-size: 0.98em;
-    color: #495057; /* Slightly lighter text for nested items */
-    animation: none; /* No animation for nested items */
+    color: #495057;
+    animation: none;
     opacity: 1;
     transform: none;
-    border-left: 3px solid #6c757d; /* Gray accent for nested */
+    border-left: 3px solid #6c757d;
     padding-left: 15px;
 }
 
@@ -1225,12 +1224,15 @@ body.single-post .site-content {
     transform: none;
     box-shadow: none;
     background-color: transparent;
-    border-left-color: #343a40; /* Darker gray on hover */
+    border-left-color: #343a40;
 }
 
 
-/* Responsive Adjustments */
 @media (max-width: 991px) {
+    .menu-toggle,
+.menu-close {
+    display: block; /* Hide toggle and close button by default */
+}
     .page-template-template-department-services .department-services-content-area {
         padding: 30px 40px;
     }
@@ -1245,7 +1247,7 @@ body.single-post .site-content {
 @media (max-width: 767px) {
     .page-template-template-department-services .department-services-content-area {
         margin: 20px auto;
-        padding: 25px 20px; /* Adjust padding for mobile */
+        padding: 25px 20px;
         border-radius: 5px;
     }
 
@@ -1265,7 +1267,6 @@ body.single-post .site-content {
         font-size: 1em;
     }
 
-     /* Less dramatic hover on mobile if desired */
     .department-services-list ul li:hover {
         transform: translateY(-2px);
         box-shadow: 0 5px 12px rgba(0, 87, 184, 0.1);
@@ -1277,32 +1278,31 @@ body.single-post .site-content {
 --------------------------------------------------------------*/
 
 /* Hide sub-menus by default */
-.main-navigation ul ul {
+#site-navigation-desktop ul ul {
     display: none;
     position: absolute;
     left: 0;
-    top: 100%; /* Position below parent */
+    top: 100%;
     background-color: #fff;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     padding: 0;
     margin: 0;
-    min-width: 200px; /* Default width for simple dropdowns */
+    min-width: 200px;
     z-index: 1000;
     border-radius: 0 0 5px 5px;
 }
 
-.main-navigation ul li:hover > ul {
-    /* Basic dropdown display on hover (will be overridden for mega menu) */
-     /* display: block; Let JS handle this */
+#site-navigation-desktop ul li:hover > ul {
+    /* display: block; Let JS handle this */
 }
 
-.main-navigation ul ul li {
+#site-navigation-desktop ul ul li {
     width: 100%;
     margin: 0;
     border: none;
 }
 
-.main-navigation ul ul li a {
+#site-navigation-desktop ul ul li a {
     padding: 12px 20px;
     display: block;
     white-space: nowrap;
@@ -1311,25 +1311,25 @@ body.single-post .site-content {
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.main-navigation ul ul li:last-child a {
+#site-navigation-desktop ul ul li:last-child a {
     border-bottom: none;
 }
 
-.main-navigation ul ul li a:hover {
+#site-navigation-desktop ul ul li a:hover {
     background-color: #f8f9fa;
     color: #007bff;
-    border-bottom-color: #f0f0f0; /* Keep border color consistent */
+    border-bottom-color: #f0f0f0;
 }
 
 /* Mega Menu Specifics */
-li.menu-item-has-children.services-mega-menu {
-    position: static; /* Important: Allows mega menu full width relative to header */
+#site-navigation-desktop li.menu-item-has-children.services-mega-menu {
+    position: static;
 }
 
 .mega-menu-panel {
-    display: none; /* Hidden by default, shown by JS */
+    display: none;
     position: absolute;
-    top: 100%; /* Position below the header */
+    top: 100%;
     left: 0;
     width: 100%;
     background-color: #fff;
@@ -1344,18 +1344,16 @@ li.menu-item-has-children.services-mega-menu {
 }
 
 .mega-menu-panel.is-active {
-    display: flex; /* Use flex for columns */
+    display: flex;
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
-/* Columns within the mega menu */
 .mega-menu-column {
     padding: 0 20px;
-    min-width: 200px; /* Minimum width for each column */
+    min-width: 200px;
     border-right: 1px solid #eee;
-    /* Flex properties will be controlled by JS adding classes or direct style */
 }
 
 .mega-menu-column:last-child {
@@ -1375,8 +1373,8 @@ li.menu-item-has-children.services-mega-menu {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: block; /* Override default display:none for sub-sub-menus */
-    position: static; /* Override absolute positioning */
+    display: block;
+    position: static;
     box-shadow: none;
     background-color: transparent;
     min-width: auto;
@@ -1389,32 +1387,30 @@ li.menu-item-has-children.services-mega-menu {
 }
 
 .mega-menu-column ul li a {
-    padding: 8px 0px; /* Simpler padding */
+    padding: 8px 0px;
     color: #333;
-    border-bottom: none; /* No borders */
+    border-bottom: none;
     font-size: 0.95em;
-    display: flex; /* Align icon and text */
+    display: flex;
     align-items: center;
-    justify-content: space-between; /* Push arrow to right */
+    justify-content: space-between;
     transition: color 0.2s ease, padding-left 0.2s ease;
 }
 
 .mega-menu-column ul li a:hover {
-    color: #0056b3; /* Darker blue */
+    color: #0056b3;
     background-color: transparent;
-    padding-left: 5px; /* Indent on hover */
+    padding-left: 5px;
 }
 
-/* Arrow for items with further sub-menus */
 .mega-menu-column ul li.menu-item-has-children > a::after {
-    content: '›'; /* Right arrow */
+    content: '›';
     font-size: 1.2em;
     margin-left: 8px;
     font-weight: bold;
     color: #aaa;
 }
 
-/* Specific styling for Level 3 detailed list */
 .detailed-service-list li a {
     font-size: 0.9em;
     padding: 5px 0;
@@ -1426,36 +1422,12 @@ li.menu-item-has-children.services-mega-menu {
 }
 
 
-/* Hide mega menu on mobile - rely on burger menu */
-@media (max-width: 768px) {
-    .mega-menu-panel {
-        display: none !important; /* Force hide */
-    }
-     /* Reset centering for mobile, rely on burger menu flow */
-    .site-header {
-        justify-content: space-between;
-    }
-    .mobile-menu-container {
-         /* Styles for burger are handled separately */
-         /* We need to hide the desktop nav inside this container */
-         display: none;
-    }
-     .main-navigation {
-         display: none; /* Hide desktop nav container */
-     }
-
-     .menu-toggle {
-         display: block; /* Ensure burger is visible */
-     }
-}
-
 /*--------------------------------------------------------------
 # Single Post Responsive & Comment Styling
 --------------------------------------------------------------*/
 
 /* --- Comment Box Beautification --- */
 
-/* General Comments Area */
 #comments {
     margin-top: 40px;
     padding-top: 30px;
@@ -1469,7 +1441,6 @@ li.menu-item-has-children.services-mega-menu {
     color: #333;
 }
 
-/* Comment List */
 .comment-list {
     list-style: none;
     padding: 0;
@@ -1481,7 +1452,7 @@ li.menu-item-has-children.services-mega-menu {
     margin-bottom: 20px;
     background-color: #f9f9f9;
     border: 1px solid #e9e9e9;
-    border-left: 4px solid #007bff; /* Accent border */
+    border-left: 4px solid #007bff;
     border-radius: 5px;
     transition: box-shadow 0.3s ease;
 }
@@ -1497,7 +1468,7 @@ li.menu-item-has-children.services-mega-menu {
     border: 2px solid #eee;
 }
 
-.comment-author .fn { /* Author name */
+.comment-author .fn {
     font-weight: bold;
     color: #333;
     text-decoration: none;
@@ -1525,7 +1496,7 @@ li.menu-item-has-children.services-mega-menu {
 }
 
 .comment-content {
-    clear: both; /* Clear float from avatar */
+    clear: both;
     padding-top: 10px;
     line-height: 1.6;
 }
@@ -1550,14 +1521,12 @@ li.menu-item-has-children.services-mega-menu {
     color: #fff;
 }
 
-/* Nested Comments */
 .comment-list .children {
     list-style: none;
-    padding-left: 30px; /* Indent replies */
+    padding-left: 30px;
     margin-top: 20px;
 }
 
-/* Comment Form */
 #respond {
     background-color: #f8f9fa;
     padding: 30px;
@@ -1581,7 +1550,7 @@ li.menu-item-has-children.services-mega-menu {
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    box-sizing: border-box;
     transition: border-color 0.3s ease;
 }
 
@@ -1616,17 +1585,14 @@ li.menu-item-has-children.services-mega-menu {
     background-color: #0056b3;
 }
 
-/* --- Responsiveness for Small Devices (< 530px) --- */
 @media (max-width: 530px) {
-    /* Make featured image full width */
     .single-post-thumbnail {
         width: 100%;
-        height: auto; /* Adjust height automatically */
-        max-height: 250px; /* Optional max height */
+        height: auto;
+        max-height: 250px;
         margin-bottom: 15px;
     }
 
-    /* Ensure comment form elements don't overflow */
     #respond {
         padding: 20px;
     }
@@ -1636,18 +1602,17 @@ li.menu-item-has-children.services-mega-menu {
     .comment-form input[type="url"],
     .comment-form textarea {
         padding: 10px;
-        font-size: 0.95em; /* Slightly smaller font */
+        font-size: 0.95em;
     }
 
     .comment-form .form-submit input[type="submit"] {
         padding: 10px 20px;
-        width: 100%; /* Make button full width */
+        width: 100%;
     }
 
-    /* Ensure comment content wraps */
     .comment-content {
-        word-wrap: break-word; /* Break long words/URLs */
-        overflow-wrap: break-word; /* Standard property */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .comment-list li.comment {
@@ -1655,12 +1620,12 @@ li.menu-item-has-children.services-mega-menu {
     }
 
     .comment-author .avatar {
-        width: 40px; /* Smaller avatar */
+        width: 40px;
         height: 40px;
         margin-right: 10px;
     }
 
     .comment-list .children {
-        padding-left: 15px; /* Reduce indent for nested comments */
+        padding-left: 15px;
     }
 }

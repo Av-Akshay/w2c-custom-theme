@@ -33,6 +33,9 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 :where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
 :root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}</style>
 <link rel="stylesheet" id="w2c-theme-style-css" href="/wp-content/themes/w2c-theme/style.css?ver=6.7.2" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="/wp-content/plugins/elementor/assets/lib/font-awesome/css/font-awesome.min.css?ver=4.7.0" media="all">
+<script src="/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script src="/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
 <link rel="https://api.w.org/" href="/wp-json/">
 <link rel="alternate" title="JSON" type="application/json" href="/wp-json/wp/v2/categories/4">
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd">
@@ -73,35 +76,48 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
     </div>
 <!-- .site-branding -->
 
-    <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-        <span class="hamburger-icon"></span>
-       
-    </button>
-
-    <div class="mobile-menu-container">
-        <div class="responsive-menu-header">
-            <a class="logo_link" href="/" rel="home">
-                    <img class="logo" src="/wp-content/themes/w2c-theme/assets/images/w2clogo.png" alt="way2class Logo">
-                     <!-- If you want the site title text next to the logo, you could add it here: -->
-                     <!-- <span class="site-title">way2class</span> -->
-        
-                     <span class="site_name"> Way2class </span>
-                </a>
-                <button class="menu-close" aria-label="Close menu">&times;</button>
-        </div>
-        <nav id="site-navigation" class="main-navigation">
-            <div class="menu-menu-1-container"><ul id="primary-menu" class="menu">
+    <!-- Desktop Navigation & Button Container -->
+    <div class="desktop-navigation-container">
+        <nav id="site-navigation-desktop" class="main-navigation">
+            <ul id="primary-menu-desktop" class="menu">
 <li id="menu-item-64" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-64"><a href="https://way2class.vercel.app/">Home</a></li>
 <li id="menu-item-65" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-65"><a href="https://way2class.vercel.app/services">Services</a></li>
 <li id="menu-item-66" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-66"><a href="https://way2class.vercel.app/about">About Us</a></li>
 <li id="menu-item-67" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-67"><a href="https://way2class.vercel.app/contact">Contact</a></li>
 <li id="menu-item-68" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-68"><a href="/blogs/">Blogs</a></li>
-</ul></div>        </nav><!-- #site-navigation -->
+</ul>        </nav><!-- #site-navigation-desktop -->
+    </div>
+<!-- .desktop-navigation-container -->
 
-        <div class="header-button">
-            <a href="#" class="button">Connect with us</a> <!-- Replace # with the actual link -->
+    <div class="header-button">
+            <a href="https://way2class.vercel.app/contact" class="button">Connect with us</a> <!-- Replace # with the actual link -->
+    </div>
+    <!-- Hamburger Toggle Button (Shown on Tablet/Mobile) -->
+    <button class="menu-toggle" aria-controls="mobile-menu-panel" aria-expanded="false">
+        <span class="hamburger-icon"></span>
+    </button>
+
+    <!-- Mobile Menu Panel (Initially Hidden by CSS) -->
+    <div id="mobile-menu-panel" class="mobile-menu-container">
+        <div class="responsive-menu-header">
+            <a class="logo_link" href="/" rel="home">
+                <img class="logo" src="/wp-content/themes/w2c-theme/assets/images/w2clogo.png" alt="way2class Logo">
+                <span class="site_name"> Way2class </span>
+            </a>
+            <button class="menu-close" aria-label="Close menu">&times;</button>
         </div>
-    </div> <!-- .mobile-menu-container -->
+        <nav id="site-navigation-mobile" class="main-navigation">
+            <ul id="primary-menu-mobile" class="menu">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-64"><a href="https://way2class.vercel.app/">Home</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-65"><a href="https://way2class.vercel.app/services">Services</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-66"><a href="https://way2class.vercel.app/about">About Us</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-67"><a href="https://way2class.vercel.app/contact">Contact</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-68"><a href="/blogs/">Blogs</a></li>
+</ul>        </nav><!-- #site-navigation-mobile -->
+        <div class="header-button">
+            <a href="https://way2class.vercel.app/contact" class="button">Connect with us</a> <!-- Re-add button inside panel -->
+        </div>
+    </div> <!-- #mobile-menu-panel -->
 
 </header><!-- #masthead -->
 
@@ -248,7 +264,9 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 				</div>
 				<p class="footer-description">Providing high-quality educational content solutions that transform learning experiences.</p>
 				<div class="footer-social-icons">
-					<a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><span class="social-icon">[LinkedIn]</span></a> 					<a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="social-icon">[Instagram]</span></a> 				</div>
+					<a href="https://www.linkedin.com/company/way2class-pvt-ltd/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="social-icon linkedin-icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 53.79-54.3c29.7 0 53.79 24.2 53.79 54.3a53.79 53.79 0 0 1 -53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg></a>
+					<a href="https://www.instagram.com/way2class/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg class="social-icon instagram-icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg></a>
+				</div>
 			</div>
 <!-- .footer-col-1 -->
 
@@ -267,7 +285,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 					<li><a href="https://way2class.vercel.app/services">Publishing & Production</a></li>
 					<li><a href="https://way2class.vercel.app/services">Grapic & UX Design</a></li>
 					<li><a href="https://way2class.vercel.app/services">IT & Technical Solution</a></li>
-					<li><a href="https://way2class.vercel.app/services">IT & Technical Solution</a></li>
+					
 				</ul>
 			</div>
 <!-- .footer-col-3 -->
@@ -276,10 +294,12 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 				<h4 class="widget-title">Contact Us</h4>
 				<ul class="footer-contact-info">
 					<li>
-<span class="contact-icon">[Location]</span> Churu, Rajasthan, India</li> 					<li>
-<span class="contact-icon">[Email]</span> <a href="mailto:info@way2class.com">info@way2class.com</a>
-</li> 				</ul>
-				<a href="#" class="button footer-contact-button">Contact Us &rarr;</a> 			</div>
+<svg class="contact-icon map-icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 384 512" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M215.7 499.2C267 435 384 279.4 384 192 384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2 12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64 64 28.7 64 64-28.7 64-64 64z"></path></svg> Churu, Rajasthan, India</li>
+					<li>
+<svg class="contact-icon envelope-icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M48 64C21.5 64 0 85.5 0 112v288c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm0 48h416v56.5l-208 132L48 168.5V112zm0 336l160-101 48 30.5 48-30.5 160 101H48z"></path></svg> <a href="mailto:info@way2class.com">info@way2class.com</a>
+</li>
+				</ul>
+				<a href="https://way2class.vercel.app/contact" class="button footer-contact-button">Contact Us &rarr;</a> 			</div>
 <!-- .footer-col-4 -->
 
 		</div>
